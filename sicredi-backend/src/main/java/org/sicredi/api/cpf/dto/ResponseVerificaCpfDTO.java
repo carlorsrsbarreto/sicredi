@@ -1,4 +1,4 @@
-package org.sicredi.api.dto;
+package org.sicredi.api.cpf.dto;
 
 public class ResponseVerificaCpfDTO {
 	private String status;

@@ -3,7 +3,9 @@ package org.sicredi.service;
 import java.util.List;
 
 import org.sicredi.entity.UserApp;
+import org.sicredi.exception.CpfInvalidoException;
 import org.sicredi.repository.UserRepository;
+import org.sicredi.util.cpf.GeraValidarCpf;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
 	private UserRepository associadoRepository;
+	private GeraValidarCpf geraValidarCpf;
 	
-	public UserService(UserRepository associadoRepository) {
+	public UserService(UserRepository associadoRepository,GeraValidarCpf geraValidarCpf) {
 		this.associadoRepository = associadoRepository;
+		this.geraValidarCpf =geraValidarCpf;
 	}
 	
 	@Transactional
@@ -25,12 +29,16 @@ public class UserService {
 	@Transactional
 	public boolean podeVotar(long cpf) {
 		
-		UserApp associado = associadoRepository.findByNuCpf(cpf);
-		if (associado==null) {
-			
+		if (!geraValidarCpf.isCPF(String.valueOf(cpf))) {
+			throw new CpfInvalidoException();
 		}
-		
-		if (associado.getStPodeVotar()==1) {
+
+		UserApp user = associadoRepository.findByNuCpf(cpf);
+		if (user==null) {
+			throw new CpfInvalidoException();
+		}
+
+		if (user.getStPodeVotar()==1) {
 			return true;
 		}
 

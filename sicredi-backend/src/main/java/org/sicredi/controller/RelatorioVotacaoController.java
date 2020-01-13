@@ -20,7 +20,7 @@ public class RelatorioVotacaoController {
 	}
 
 	@GetMapping(value = "/votacao", produces = "application/json")
-    public ResponseEntity<ResponseDTO> relatorioVotacao() {
+    public ResponseEntity<ResponseDTO> relatorioDeVotacao() {
 		try {
 			
 			return ResponseEntity.accepted().body(
@@ -32,19 +32,4 @@ public class RelatorioVotacaoController {
 			);
 		}
 	}
-
-	@GetMapping(value = "/todos", produces = "application/json")
-    public ResponseEntity<ResponseDTO> relatorioTodos() {
-		try {
-			
-			return ResponseEntity.accepted().body(
-					ResponseMessage.listaSucesso().body(sessaoVotacaoVotoService.buscarTodos())
-			);
-		} catch (SicrediException e) {
-			return ResponseEntity.badRequest().body(
-					ResponseMessage.error(e).emptyBody()
-			);
-		}
-	}
-
 }

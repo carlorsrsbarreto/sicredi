@@ -25,7 +25,16 @@ public class ResponseMessage {
 		responseMessage.responseDTO.setMessage(messageDTO);
 		return responseMessage;		
 	}
-	
+
+	public static ResponseMessage votoComputadoSucesso() {
+		ResponseMessage responseMessage = new ResponseMessage();
+		MessageDTO messageDTO = new MessageDTO();
+		messageDTO.setCode("I0001");
+		messageDTO.setMessage("Voto computado com sucesso!");
+		responseMessage.responseDTO.setMessage(messageDTO);
+		return responseMessage;		
+	}
+
 	public static ResponseMessage error(SicrediException e) {
 		ResponseMessage responseMessage = new ResponseMessage();
 		MessageDTO messageDTO = new MessageDTO();

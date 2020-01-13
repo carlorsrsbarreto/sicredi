@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @RestController
 @RequestMapping("pauta")
 public class PautaController {
@@ -23,7 +25,7 @@ public class PautaController {
 	}
 
 	@GetMapping(produces = "application/json")
-    public ResponseEntity<ResponseDTO> listPautaAll() {
+    public ResponseEntity<ResponseDTO> listarTodosPauta() {
 		try {
 			return ResponseEntity.accepted().body(
 					ResponseMessage.listaSucesso().body(
@@ -39,7 +41,7 @@ public class PautaController {
     }
 	
 	@PostMapping(produces = "application/json")
-    public Pauta insert(@RequestBody Pauta pauta) {
+    public Pauta cadastrarPauta(@RequestBody Pauta pauta) {
         return pautaService.save(pauta);
     }
 	

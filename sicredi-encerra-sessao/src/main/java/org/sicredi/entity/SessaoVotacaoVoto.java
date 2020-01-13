@@ -11,16 +11,16 @@ import javax.persistence.UniqueConstraint;
 @IdClass(SessaoVotacaoVotoId.class)
 public class SessaoVotacaoVoto {
 	@Id
-	private long idSessaoVotacao;
+	private int idSessaoVotacao;
 	@Id
 	private long nuCpf;
 	private String voto;
-	private int votoComputado;
+	private long votoComputado;
 		 
-	public long getIdSessaoVotacao() {
+	public int getIdSessaoVotacao() {
 		return idSessaoVotacao;
 	}
-	public void setIdSessaoVotacao(long idSessaoVotacao) {
+	public void setIdSessaoVotacao(int idSessaoVotacao) {
 		this.idSessaoVotacao = idSessaoVotacao;
 	}
 	
@@ -36,10 +36,10 @@ public class SessaoVotacaoVoto {
 	public void setNuCpf(long nuCpf) {
 		this.nuCpf = nuCpf;
 	}
-	public int getVotoComputado() {
+	public long getVotoComputado() {
 		return votoComputado;
 	}
-	public void setVotoComputado(int votoComputado) {
+	public void setVotoComputado(long votoComputado) {
 		this.votoComputado = votoComputado;
 	}
 	

@@ -22,7 +22,7 @@ public class SessaoPautaController {
 	}
 
 	@PostMapping(value = "/abrir", produces = "application/json")
-    public ResponseEntity<ResponseDTO> abrirSessao(@RequestBody SessaoVotacaoDTO sessaoVotacaoDTO) {
+    public ResponseEntity<ResponseDTO> abrirSessaoVotacao(@RequestBody SessaoVotacaoDTO sessaoVotacaoDTO) {
 		try {
 			sessaoVotacaoService.abrirSessao(sessaoVotacaoDTO);		
 			return ResponseEntity.accepted().body(

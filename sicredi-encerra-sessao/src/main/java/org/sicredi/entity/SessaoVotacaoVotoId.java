@@ -7,10 +7,10 @@ public class SessaoVotacaoVotoId implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 4122315715705845737L;
-	private long idSessaoVotacao;
+	private int idSessaoVotacao;
 	private long nuCpf;
 		 
-	public long getIdSessaoVotacao() {
+	public int getIdSessaoVotacao() {
 		return idSessaoVotacao;
 	}
 	public void setIdSessaoVotacao(int idSessaoVotacao) {

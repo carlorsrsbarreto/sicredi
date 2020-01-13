@@ -41,5 +41,6 @@ public interface SessaoVotacaoVotoRepository extends CrudRepository<SessaoVotaca
     		nativeQuery = true)
     public List<Object[]> findAllOrderByDateIniAndPauta();
     
-
+    public SessaoVotacaoVoto findByNuCpfAndIdSessaoVotacao(long nuCpf,long idSessaoVotacao);
+    
 }

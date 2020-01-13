@@ -8,13 +8,13 @@ import javax.persistence.Id;
 @Entity
 public class Pauta {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idPauta;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idPauta;
 	private String nmPauta;
-	public int getIdPauta() {
+	public long getIdPauta() {
 		return idPauta;
 	}
-	public void setIdPauta(int idPauta) {
+	public void setIdPauta(long idPauta) {
 		this.idPauta = idPauta;
 	}
 	public String getNmPauta() {

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.sicredi.api.VerificaCpfApi;
+import org.sicredi.api.cpf.VerificaCpfApi;
 import org.sicredi.dto.RelatorioVotacaoDTO;
 import org.sicredi.dto.VotoDTO;
 import org.sicredi.entity.SessaoVotacao;
 import org.sicredi.entity.SessaoVotacaoVoto;
+import org.sicredi.exception.UsuarioJaVotouException;
 import org.sicredi.exception.UsuarioNaoAutorizadoVotarException;
 import org.sicredi.repository.SessaoVotacaoRepository;
 import org.sicredi.repository.SessaoVotacaoVotoRepository;
@@ -17,10 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class SessaoVotacaoVotoService {
+	
+	private int PARAM_VOTO_NAO_COMPUTADO = 0;
 
 	private SessaoVotacaoVotoRepository sessaoVotacaoVotoRepository;
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
 	private VerificaCpfApi verificaCpfApi;
+	
 	public SessaoVotacaoVotoService(
 			SessaoVotacaoVotoRepository sessaoVotacaoVotoRepository,
 			SessaoVotacaoRepository sessaoVotacaoRepository,
@@ -34,13 +38,19 @@ public class SessaoVotacaoVotoService {
 	public SessaoVotacaoVoto votar(VotoDTO votoDTO){
 		
 		SessaoVotacao sessaoVotacao = sessaoVotacaoRepository.findByIdPauta(votoDTO.getIdPauta());
-		SessaoVotacaoVoto sessaoVotacaoVoto = new SessaoVotacaoVoto();
+		
+		SessaoVotacaoVoto sessaoVotacaoVoto = sessaoVotacaoVotoRepository.findByNuCpfAndIdSessaoVotacao(votoDTO.getNuCpf(), sessaoVotacao.getIdSessaoVotacao());
+		if (sessaoVotacaoVoto!=null) {
+			throw new UsuarioJaVotouException();	
+		}
 		
 		boolean podeVotar = verificaCpfApi.verificaSeCpfPodeVotar(votoDTO.getNuCpf());
 		if (podeVotar) {
+			sessaoVotacaoVoto = new SessaoVotacaoVoto();
 			sessaoVotacaoVoto.setIdSessaoVotacao(sessaoVotacao.getIdSessaoVotacao());
 			sessaoVotacaoVoto.setVoto(votoDTO.getVoto());
 			sessaoVotacaoVoto.setNuCpf(votoDTO.getNuCpf());
+			sessaoVotacaoVoto.setVotoComputado(PARAM_VOTO_NAO_COMPUTADO);
 			return sessaoVotacaoVotoRepository.save(sessaoVotacaoVoto);
 			
 		} else {
@@ -59,19 +69,13 @@ public class SessaoVotacaoVotoService {
 			relatorioVotacaoDTO.setNmPauta(object[0].toString()) ;
 			relatorioVotacaoDTO.setDtInicioVotacao(new Date());
 			relatorioVotacaoDTO.setDtFinalVotacao(new Date());
-			relatorioVotacaoDTO.setQtdVotosFalse(Integer.valueOf(object[3].toString()));
-			relatorioVotacaoDTO.setQtdVotosTrue(Integer.valueOf(object[4].toString()));
+			relatorioVotacaoDTO.setQtdVotosTrue(Integer.valueOf(object[3].toString()));
+			relatorioVotacaoDTO.setQtdVotosFalse(Integer.valueOf(object[4].toString()));
 			relatorioVotacaoDTO.setStatus(object[5].toString());
 			list.add(relatorioVotacaoDTO);
 		}
-		return list;
-	}
-	
-	
-	public Iterable<SessaoVotacaoVoto> buscarTodos(){
 		
-
-		return sessaoVotacaoVotoRepository.findAll();
+		return list;
 	}
 	
 }

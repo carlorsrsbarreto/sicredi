@@ -22,12 +22,12 @@ public class VotacaoController {
 	}
 
 	@PostMapping(value = "/votar", produces = "application/json")
-    public ResponseEntity<ResponseDTO> votar(@RequestBody VotoDTO votoDTO) {
+    public ResponseEntity<ResponseDTO> votarNaPauta(@RequestBody VotoDTO votoDTO) {
 		try {
 			
 			sessaoVotacaoVotoService.votar(votoDTO);		
 			return ResponseEntity.accepted().body(
-					ResponseMessage.sessaoAbertaSucesso().emptyBody()
+					ResponseMessage.votoComputadoSucesso().emptyBody()
 			);
 		} catch (SicrediException e) {
 			return ResponseEntity.badRequest().body(

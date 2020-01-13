@@ -11,18 +11,20 @@ import javax.persistence.Id;
 @Entity
 public class SessaoVotacao {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idSessaoVotacao;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long idSessaoVotacao;
 	@Column(unique=true)
 	private int idPauta;
 	private Date dtInicioVotacao;
 	private Date dtFinalVotacao;
 	private int idStatusSessaoVotacao;
+	private long qtVotosSim;
+	private long qtVotosNao;
 	
-	public int getIdSessaoVotacao() {
+	public long getIdSessaoVotacao() {
 		return idSessaoVotacao;
 	}
-	public void setIdSessaoVotacao(int idSessaoVotacao) {
+	public void setIdSessaoVotacao(long idSessaoVotacao) {
 		this.idSessaoVotacao = idSessaoVotacao;
 	}
 	public int getIdPauta() {
@@ -49,6 +51,17 @@ public class SessaoVotacao {
 	public void setIdStatusSessaoVotacao(int idStatusSessaoVotacao) {
 		this.idStatusSessaoVotacao = idStatusSessaoVotacao;
 	}
-	
-	
+	public long getQtVotosSim() {
+		return qtVotosSim;
+	}
+	public void setQtVotosSim(long qtVotosSim) {
+		this.qtVotosSim = qtVotosSim;
+	}
+	public long getQtVotosNao() {
+		return qtVotosNao;
+	}
+	public void setQtVotosNao(long qtVotosNao) {
+		this.qtVotosNao = qtVotosNao;
+	}
+
 }

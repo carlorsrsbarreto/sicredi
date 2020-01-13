@@ -5,6 +5,7 @@ import java.net.URI;
 
 import org.sicredi.dto.ResponseDTO;
 import org.sicredi.entity.UserApp;
+import org.sicredi.exception.CpfInvalidoException;
 import org.sicredi.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,9 +56,9 @@ public class UserController {
 			} else {
 				responseDTO.setStatus(PARAM_UNABLE_TO_VOTE);
 			}
-			return ResponseEntity.accepted().body(responseDTO);
+			return ResponseEntity.ok().body(responseDTO);
 			
-		} catch (Exception e) {
+		} catch (CpfInvalidoException e) {
 			return ResponseEntity.notFound().build();
 		}
     }

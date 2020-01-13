@@ -33,23 +33,5 @@ public class SessaoVotacaoService {
 		}
 	}
 
-	public void encerrarSessao(int idSessaoVotacao) {
-		try {
-			
-			Optional<SessaoVotacao>  sessaoVotacaoOp = sessaoVotacaoRepository.findById(Integer.valueOf(idSessaoVotacao));
-			if (!sessaoVotacaoOp.isPresent()) {
-				throw new SessaoVotacaoNaoEncontradaException();
-			}
-			
-			SessaoVotacao sessaoVotacao = sessaoVotacaoOp.get();
-			if (sessaoVotacao.getIdStatusSessaoVotacao()==StatusSessaoVotacaoEnum.FECHADO.getStatus()) {
-				throw new EncerrarSessaoVotacaoException();
-			}
-			
-			sessaoVotacaoRepository.encerrarVotacao(idSessaoVotacao,StatusSessaoVotacaoEnum.FECHADO.getStatus());
-		} catch (DataIntegrityViolationException e) {
-			throw new AbrirSessaoVotacaoException();
-		}
-	}
 
 }
