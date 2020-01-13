@@ -20,6 +20,8 @@ Eu tinha um desejo de implementar o padrão Circuit Breaker entre os serviços d
 <b>7. O Docker Compose poderia ser uma opção para gerenciar os Container mas achei que agregaria mais complexidade para o desafio.</b><br>
 <b>8. Técnicas como cahce de segundo nível poderia aumentar a performance mas não foi implementado - MVVP 2.</b><br>
 <b>9. Tornar mais granular o serviço poderia ser uma opção, principalmente separar o serviço de votação.</b><br>
+<b>10. Pamaetrizar as aplicações usando as variáveis do DockerFile - MVP - 2.</b><br>
+
 <br>
 
 <b><h2>Obs:Essas aplicações estão configuradas para ser usadas com o Docker. Para a instalação e utilização do programa é necessário a instalação do Docker.</h2></b>
