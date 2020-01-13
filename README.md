@@ -75,3 +75,9 @@ Eu tinha um desejo de implementar o padrão Circuit Breaker entre os serviços d
 <b>Documentação Swegger - Serviços</b><br>
 http://localhost:8081/sicredi-backend/swagger-ui.html<br>
 
+<h2>Procedimento para teste :</h2> 
+
+1. Criar uma pauta
+2. Abrir a pauta
+3. Votar na pauta
+4. Visualisar relatorio
