@@ -81,3 +81,4 @@ http://localhost:8081/sicredi-backend/swagger-ui.html<br>
 2. Abrir a pauta
 3. Votar na pauta
 4. Visualisar relatorio
+5. Visulizar no RabbitMQ a mensagem postada no processo de encerramento da sessão.
